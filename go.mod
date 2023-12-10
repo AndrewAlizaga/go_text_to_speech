@@ -1,4 +1,4 @@
-module github.com/AndrewAlizaga/go-text-to-speech
+module github.com/AndrewAlizaga/go_text_to_speech
 
 go 1.21.1
 

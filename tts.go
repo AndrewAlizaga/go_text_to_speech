@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+
+	uuid "github.com/satori/go.uuid"
 )
 
 type AudioFormat int32
@@ -29,6 +31,14 @@ type TextToSpeech struct {
 }
 
 func (t *TextToSpeech) TextToSpeech(text, fileName string) (fileDir string, err error) {
+
+	if fileName == "" {
+		fileName = uuid.NewV4().String()
+	}
+
+	if t.Dir == "" {
+		t.Dir = "audio"
+	}
 
 	fileDir = t.Dir + "/" + fileName + "." + getAudioFormat(t.Format)
 
@@ -66,6 +76,8 @@ func (t *TextToSpeech) createFile(text, fileName string) (err error) {
 			err = fmt.Errorf("File already exists - to overwrite set FileOverwrite = true")
 		}
 	}
+
+	err = nil
 
 	if writeFile {
 

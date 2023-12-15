@@ -35,6 +35,11 @@ func (t *TextToSpeech) TextToSpeech(text, fileName string) (fileDir string, err 
 	if fileName == "" {
 		fileName = uuid.NewV4().String()
 	}
+
+	if t.Dir == "" {
+		t.Dir = "audio"
+	}
+
 	fileDir = t.Dir + "/" + fileName + "." + getAudioFormat(t.Format)
 
 	if err = t.createFolder(); err == nil {
